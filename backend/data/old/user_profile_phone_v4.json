@@ -1,0 +1,269 @@
+{
+    "user": {
+        "preferenceData": {
+            "brand": [
+                "Nokia"
+            ],
+            "nettech": [
+                "5G"
+            ],
+            "os1": [
+                "Android"
+            ],
+            "nfc": [
+                "false"
+            ],
+            "year": [
+                "2018"
+            ],
+            "fullscreen": [
+                "false"
+            ],
+            "price": [
+                100,
+                300
+            ],
+            "displaysize": [
+                5,
+                6
+            ],
+            "storage": [
+                32,
+                64
+            ],
+            "phone_weight": [
+                50,
+                100
+            ],
+            "battery": [
+                2000,
+                3000
+            ],
+            "phone_size": [],
+            "phone_thickness": [],
+            "resolution": [],
+            "camera": [],
+            "ram": [],
+            "popularity": []
+        },
+        "_id": "23fsdf23r4fsdfss",
+        "user_preference_model": {
+            "preference_value": {
+                "brand": {
+                    "Nokia": 1,
+                    "Huawei": 3
+                },
+                "nettech": {
+                    "5G": 1,
+                    "GSM": 3,
+                    "HSPA": 3,
+                    "LTE": 3
+                },
+                "os1": {
+                    "Android": 4
+                },
+                "nfc": {
+                    "false": 1,
+                    "true": 3
+                },
+                "year": {
+                    "2018": 1,
+                    "2017": 3
+                },
+                "fullscreen": {
+                    "false": 4
+                },
+                "phone_size": {
+                    "1": 4,
+                    "2": 1,
+                    "3": 1,
+                    "4": 1,
+                    "5": 1
+                },
+                "phone_thickness": {
+                    "1": 4,
+                    "2": 1,
+                    "3": 1,
+                    "4": 1,
+                    "5": 1
+                },
+                "phone_weight": {
+                    "1": 4,
+                    "2": 0,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0
+                },
+                "resolution": {
+                    "1": 4,
+                    "2": 1,
+                    "3": 1
+                },
+                "camera": {
+                    "1": 4,
+                    "2": 1,
+                    "3": 1,
+                    "4": 1
+                },
+                "storage": {
+                    "1": 3,
+                    "2": 0,
+                    "3": 1,
+                    "4": 1,
+                    "5": 0
+                },
+                "ram": {
+                    "1": 1,
+                    "2": 4,
+                    "3": 1,
+                    "4": 1,
+                    "5": 1
+                },
+                "displaysize": {
+                    "1": 4,
+                    "2": 1,
+                    "3": 1,
+                    "4": 0,
+                    "5": 0
+                },
+                "battery": {
+                    "1": 4,
+                    "2": 1,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0
+                },
+                "price": {
+                    "1": 4,
+                    "2": 1,
+                    "3": 1,
+                    "4": 1,
+                    "5": 1,
+                    "6": 1,
+                    "7": 1,
+                    "8": 0,
+                    "9": 0,
+                    "10": 0
+                },
+                "popularity": {
+                    "1": 4,
+                    "2": 1,
+                    "3": 1,
+                    "4": 1,
+                    "5": 1,
+                    "6": 1,
+                    "7": 1,
+                    "8": 1,
+                    "9": 1,
+                    "10": 1
+                }
+            },
+            "attribute_frequency": {
+                "brand": 1,
+                "nettech": 2,
+                "os1": 1,
+                "nfc": 1,
+                "year": 1,
+                "fullscreen": 1,
+                "phone_size": 1,
+                "phone_thickness": 1,
+                "phone_weight": 1,
+                "resolution": 1,
+                "camera": 1,
+                "storage": 1,
+                "ram": 1,
+                "displaysize": 1,
+                "battery": 1,
+                "price": 4,
+                "popularity": 1
+            }
+        },
+        "user_critique_preference": [
+            {
+                "attribute": "price",
+                "crit_direction": "higher",
+                "value": 4
+            },
+            {
+                "attribute": "price",
+                "crit_direction": "higher",
+                "value": 4
+            },
+            {
+                "attribute": "price",
+                "crit_direction": "higher",
+                "value": 4
+            },
+            {
+                "attribute": "nettech",
+                "crit_direction": "5G"
+            }
+        ],
+        "user_constraints": [
+            {
+                "attribute": "nettech",
+                "crit_direction": "5G"
+            },
+            {
+                "attribute": "price",
+                "crit_direction": "higher",
+                "value": 4
+            }
+        ]
+    },
+    "topRecommendedItem": "Huawei P smart",
+    "logger": {
+        "dialog": [],
+        "latest_dialog": [
+            {
+                "agent": "you",
+                "text": "higher price",
+                "modality": "typing",
+                "action": "User_Critique",
+                "critique": [
+                    {
+                        "price": "higher"
+                    },
+                    {
+                        "nettech": "5G"
+                    }
+                ],
+                "critiqued_item": "Huawei P smart",
+                "timestamp": 1554364438665
+            },
+            {
+                "agent": "robot",
+                "text": "alcatel Tetra",
+                "action": "Recommend",
+                "timestamp": 1554364466208
+            },
+            {
+                "agent": "you",
+                "text": "I like this one.",
+                "modality": "btn",
+                "action": "Accept_Item",
+                "user_critique": [
+                    {
+                        "price": "higher"
+                    }
+                ],
+                "critiqued_item": "Huawei P smart",
+                "timestamp": 1554364493262
+            }
+        ],
+        "browsedItems": [
+            "alcatel Tetra",
+            "alcatel Pulsemix",
+            "Allview X4 Soul Infinity Plus",
+            "Huawei P smart"
+        ],
+        "likedItems": [
+            "alcatel Tetra",
+            "alcatel Pulsemix"
+        ],
+        "dislikedItems": [
+            "Allview X4 Soul Infinity Plus",
+            "Huawei P smart"
+        ]
+    }
+}

@@ -46,3 +46,18 @@ def load_item_data_json(item_data):
         item_data_all = json.load(file_item_data)
 
     return item_data_all
+
+def load_phone_data_df(phone_data_file):
+    phone_data = load_json_data(phone_data_file)
+
+    phone_data = phone_data['phones']
+    phone_data_dict = {}
+    id = 0
+    for each_phone in phone_data:
+        id += 1
+        phone_data_dict[id] = each_phone
+
+    phone_data_df = pd.DataFrame.from_dict(phone_data_dict, orient='index')
+
+    return phone_data_df
+

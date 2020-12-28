@@ -4,11 +4,24 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 const recognition = new SpeechRecognition();
 const genreData = genreMapList
 
-var spotifyToken = $.cookie('spotify-token')
-var refreshToken = $.cookie('refresh-token')
+// var spotifyToken = $.cookie('spotify-token')
+// var refreshToken = $.cookie('refresh-token')
 
 
 var storage = window.localStorage;
+var selectedPhones = window.localStorage.getItem("selectedPhones").split(",")
+selectedPhoneData = []
+
+for (var i in selectedPhones){
+    selectedPhoneData.push(parseInt(selectedPhones[i], 10))
+}
+var initiateData = {
+    id: 'test',
+    phones : selectedPhoneData,
+}
+console.log(initiateData)
+
+
 
 var skipTimes = 0;
 
@@ -18,7 +31,7 @@ var isPreStudy = true
 var isSystemCrit = 1;
 var viewedPhones = []
 var isFinished = false
-var topRecommendedSong;
+var topRecommendedItem;
 var nextTimes = 0;
 var showNextSong, showCurrentPhone, showNextSong2, showNextSong3, showCurrentPhone2, showFeedback, showTry;
 
@@ -31,9 +44,9 @@ var usermodel = {}
 //diversity_oriented
 //personality_adjusted
 //base
-var sysCritVersion = window.location.search.substring(1)
-
-console.log(sysCritVersion)
+// var sysCritVersion = window.location.search.substring(1)
+var sysCritVersion = 'preference_oriented'
+// console.log(sysCritVersion)
 
 logger.dialog = []
 logger.viewedPhones = []
@@ -168,7 +181,7 @@ $(document).ready(function () {
         profile_py["user_profile"] = {}
         profile_py["user_profile"]["user"] = data.user
         profile_py["user_profile"]["logger"] = data.logger
-        profile_py["user_profile"]["topRecommendedSong"] = data.topRecommendedSong
+        profile_py["user_profile"]["topRecommendedItem"] = data.topRecommendedItem
 
         return $.ajax({
             type: "POST",
@@ -224,7 +237,7 @@ $(document).ready(function () {
         profile_py["user_profile"]["pool"] = data.pool
         profile_py["user_profile"]["new_pool"] = data.new_pool
         profile_py["user_profile"]["user"] = data.user
-        profile_py["user_profile"]["topRecommendedSong"] = data.topRecommendedSong
+        profile_py["user_profile"]["topRecommendedItem"] = data.topRecommendedItem
         profile_py["user_profile"]["logger"] = data.logger
         profile_py["sys_crit_version"] = data.sys_crit_version
 
@@ -254,7 +267,7 @@ $(document).ready(function () {
 
         var profile_py = {}
         profile_py["user_profile"] = {}
-        profile_py["user_profile"]["topRecommendedSong"] = data.topRecommendedSong
+        profile_py["user_profile"]["topRecommendedItem"] = data.topRecommendedItem
         profile_py["user_profile"]["logger"] = data.logger
 
         console.log(profile_py)
@@ -278,17 +291,16 @@ $(document).ready(function () {
 
 
     $.ajax({
-        url: "js/newPhone.json",
-        type: "GET",
+        url: "/initiate",
+        type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
+        data:JSON.stringify(initiateData),
         success: function (data) {
-
             usermodel = data
             console.log(usermodel)
-            topRecommendedSong = usermodel.pool[0];
-            usermodel.topRecommendedSong = topRecommendedSong
-
+            topRecommendedItem = usermodel.pool[0];
+            usermodel.topRecommendedItem = topRecommendedItem.id
             //initialize user model
             initializeUserModel(usermodel.user)
 
@@ -435,16 +447,17 @@ $(document).ready(function () {
                 }, 2000)
 
                 $.ajax({
-                    url: "/initiate?token=" + spotifyToken + "&id=" + userid,
+                    url: "/initiate",
                     type: "POST",
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
+                    data: JSON.stringify(initiateData),
                     success: function (data2) {
 
                         usermodel = data2
                         console.log(usermodel)
-                        topRecommendedSong = usermodel.pool[0];
-                        usermodel.topRecommendedSong = topRecommendedSong
+                        topRecommendedItem = usermodel.pool[0];
+                        usermodel.topRecommendedItem = topRecommendedItem.id
 
                         //initialize user model
                         initializeUserModel(usermodel.user)
@@ -634,7 +647,7 @@ $(document).ready(function () {
                 updateData.logger.latest_dialog = [dialog]
                 updateData.logger.viewedPhones = logger.viewedPhones
                 var viewedPhonesLength = logger.viewedPhones.length
-                updateData.topRecommendedSong = logger.viewedPhones[viewedPhonesLength - 1]
+                updateData.topRecommendedItem = logger.viewedPhones[viewedPhonesLength - 1].id
 
                 console.log(updateData)
 
@@ -831,7 +844,7 @@ $(document).ready(function () {
                     updateData.logger.viewedPhones = logger.viewedPhones
 
                     var viewedPhonesLength = logger.viewedPhones.length
-                    updateData.topRecommendedSong = logger.viewedPhones[viewedPhonesLength - 1]
+                    updateData.topRecommendedItem = logger.viewedPhones[viewedPhonesLength - 1].id
 
                     console.log(updateData)
                     updateUserModel(updateData)
@@ -897,7 +910,7 @@ $(document).ready(function () {
                     updateData.logger.viewedPhones = logger.viewedPhones
 
                     var viewedPhonesLength = logger.viewedPhones.length
-                    updateData.topRecommendedSong = logger.viewedPhones[viewedPhonesLength - 1]
+                    updateData.topRecommendedItem = logger.viewedPhones[viewedPhonesLength - 1].id
 
                     console.log(updateData)
                     updateUserModel(updateData)
@@ -1026,7 +1039,7 @@ $(document).ready(function () {
                                             updateData.logger.viewedPhones = logger.viewedPhones
                                             updateData.logger.likedSongs = logger.likedSongs
                                             var viewedPhonesLength = logger.viewedPhones.length
-                                            updateData.topRecommendedSong = logger.viewedPhones[viewedPhonesLength - 1]
+                                            updateData.topRecommendedItem = logger.viewedPhones[viewedPhonesLength - 1].id
 
                                             console.log(updateData)
                                             updateUserModel(updateData)
@@ -1043,15 +1056,15 @@ $(document).ready(function () {
                                                 numberOfLikedPhones++
 
                                                 //Exploration for niche genre music
-                                                var likedSongGenre = topRecommendedSong.genre
-                                                var likedSongArtist = topRecommendedSong.artist
+                                                var likedSongGenre = topRecommendedItem.genre
+                                                var likedSongArtist = topRecommendedItem.artist
 
-                                                if(likedSongGenre=="niche" && countGenreItems(topRecommendedSong.realgenre)<11){
+                                                if(likedSongGenre=="niche" && countGenreItems(topRecommendedItem.realgenre)<11){
 
                                                     var requestLink, explanation;
-                                                    if(topRecommendedSong.realgenre!="niche"){
-                                                        requestLink = '/searchphonelist?q=' + topRecommendedSong.realgenre + "&token=" + spotifyToken;
-                                                        explanation = "OK, I recommend this phone to you, because you like the phones of " + topRecommendedSong.realgenre + "."
+                                                    if(topRecommendedItem.realgenre!="niche"){
+                                                        requestLink = '/searchphonelist?q=' + topRecommendedItem.realgenre + "&token=" + spotifyToken;
+                                                        explanation = "OK, I recommend this phone to you, because you like the phones of " + topRecommendedItem.realgenre + "."
                                                     }else{
                                                         requestLink = '/searchArtist?q=' + likedSongArtist + '&token=' + spotifyToken;
                                                         explanation = "OK, I recommend this phone to you, because you like " + likedSongArtist + "'s phones."
@@ -1066,7 +1079,7 @@ $(document).ready(function () {
                                                     var updateData2 = {}
                                                     updateData2.logger = logger
                                                     var viewedPhonesLength = logger.viewedPhones.length
-                                                    updateData2.topRecommendedSong = logger.viewedPhones[viewedPhonesLength - 1]
+                                                    updateData2.topRecommendedItem = logger.viewedPhones[viewedPhonesLength - 1]
 
 
                                                     //for base line setting
@@ -1151,7 +1164,7 @@ $(document).ready(function () {
                                 var updateData = {}
                                 updateData.logger = logger
                                 var viewedPhonesLength = logger.viewedPhones.length
-                                updateData.topRecommendedSong = logger.viewedPhones[viewedPhonesLength - 1]
+                                updateData.topRecommendedItem = logger.viewedPhones[viewedPhonesLength - 1]
 
                                 showPhone(phonelist[phoneIndex].id)
 
@@ -1221,7 +1234,7 @@ $(document).ready(function () {
 
                 }, 1000)
 
-                topRecommendedSong = phonelist[0]
+                topRecommendedItem = phonelist[0]
                 phonelist.splice(phoneIndex, 1)
             }
 
@@ -1302,7 +1315,7 @@ $(document).ready(function () {
                     var dialog = logger.dialog[dialogNum - 1]
 
                     dialog.critique = critique
-                    dialog.critiqued_phone = topRecommendedSong.id
+                    dialog.critiqued_phone = topRecommendedItem.id
 
                     //perform update model request
                     var updateData = {}
@@ -1312,7 +1325,7 @@ $(document).ready(function () {
                     updateData.logger.viewedPhones = logger.viewedPhones
 
                     var viewedPhonesLength = logger.viewedPhones.length
-                    updateData.topRecommendedSong = logger.viewedPhones[viewedPhonesLength - 1]
+                    updateData.topRecommendedItem = logger.viewedPhones[viewedPhonesLength - 1]
 
                     console.log(updateData)
 
@@ -1411,8 +1424,8 @@ $(document).ready(function () {
                 updateChat(agent, text, action, "text");
 
 
-                if (viewedPhones.indexOf(topRecommendedSong) < 0) {
-                    viewedPhones.push(topRecommendedSong)
+                if (viewedPhones.indexOf(topRecommendedItem) < 0) {
+                    viewedPhones.push(topRecommendedItem)
                     setTimeout(function () {
                         var explaination = ""
 
@@ -1420,12 +1433,12 @@ $(document).ready(function () {
 
                             explaination = "We recommend this phone because you like "
 
-                            if (topRecommendedSong.seedType == "artist")
-                                explaination += topRecommendedSong.seed + "'s phones."
-                            else if (topRecommendedSong.seedType == "track")
-                                explaination += "the phones " + topRecommendedSong.seed + "."
-                            else if (topRecommendedSong.seedType == "genre")
-                                explaination += "the phones of " + topRecommendedSong.seed + "."
+                            if (topRecommendedItem.seedType == "artist")
+                                explaination += topRecommendedItem.seed + "'s phones."
+                            else if (topRecommendedItem.seedType == "track")
+                                explaination += "the phones " + topRecommendedItem.seed + "."
+                            else if (topRecommendedItem.seedType == "genre")
+                                explaination += "the phones of " + topRecommendedItem.seed + "."
                         }
                         if (explaination)
                             updateChat(robot, explaination, "Explain")
@@ -1474,7 +1487,7 @@ $(document).ready(function () {
                 // var updateData = {}
                 // updateData.logger = logger
                 // var viewedPhonesLength = logger.viewedPhones.length
-                // updateData.topRecommendedSong = logger.viewedPhones[viewedPhonesLength - 1]
+                // updateData.topRecommendedItem = logger.viewedPhones[viewedPhonesLength - 1]
 
 
                 // checkSystemCritiques(updateData).then(function (returnedData) {
@@ -1577,9 +1590,9 @@ $(document).ready(function () {
                         //             var num = parseInt(number)
                         //             if (num == 0) {
                         //                 console.log("没有找到匹配的歌曲")
-                        //                 var seed_artist = topRecommendedSong['artist']
-                        //                 var seed_track= topRecommendedSong['id']
-                        //                 var seed_genre = topRecommendedSong['genre']
+                        //                 var seed_artist = topRecommendedItem['artist']
+                        //                 var seed_track= topRecommendedItem['id']
+                        //                 var seed_genre = topRecommendedItem['genre']
                         //                 var seed_description = '&seed_tracks=' + seed_track //'&artistSeeds=' + seed_artist + '&seed_tracks=' + seed_track
                         //                 if (seed_genre in genreData)
                         //                     seed_description = seed_description + '&genreSeeds=' + seed_genre
@@ -1590,29 +1603,29 @@ $(document).ready(function () {
                         //
                         //                 if (valence) {
                         //                     if (valence == "happy") {
-                        //                         var tartget_value = 1.05 * topRecommendedSong["valence"]
+                        //                         var tartget_value = 1.05 * topRecommendedItem["valence"]
                         //                         requestLink = requestLink + '&target_valence=' + tartget_value;
                         //                     }
                         //                     else if (valence == "neutral") {
-                        //                         requestLink = requestLink + '&target_valence=' + topRecommendedSong["valence"];
+                        //                         requestLink = requestLink + '&target_valence=' + topRecommendedItem["valence"];
                         //
                         //                     }
                         //                     else if (valence == "sad") {
-                        //                         var tartget_value = 0.95 * topRecommendedSong["valence"]
+                        //                         var tartget_value = 0.95 * topRecommendedItem["valence"]
                         //                         requestLink = requestLink + '&target_valence=' + tartget_value;
                         //                     }
                         //                     explaination = "OK, I recommend this phone to you, because you like the phones for "+valence+ " mood."
                         //                 } else if (tempo) {
                         //                     if (tempo == "fast") {
-                        //                         var tartget_value = 1.05 * topRecommendedSong["tempo"]
+                        //                         var tartget_value = 1.05 * topRecommendedItem["tempo"]
                         //                         requestLink = requestLink + '&target_tempo=' + tartget_value;
                         //
                         //                     }
                         //                     else if (tempo == "normal") {
-                        //                         requestLink = requestLink + '&target_tempo=' + topRecommendedSong["tempo"];
+                        //                         requestLink = requestLink + '&target_tempo=' + topRecommendedItem["tempo"];
                         //
                         //                     } else if (tempo == "slow") {
-                        //                         var tartget_value = 0.95 * topRecommendedSong["tempo"]
+                        //                         var tartget_value = 0.95 * topRecommendedItem["tempo"]
                         //                         requestLink = requestLink + '&target_tempo=' + tartget_value;
                         //
                         //                     }
@@ -1621,14 +1634,14 @@ $(document).ready(function () {
                         //                     if (feature == "speech")
                         //                         feature = "speechiness"
                         //                     if (action == "higher") {
-                        //                         var tartget_value = 1.05 * topRecommendedSong[feature]
+                        //                         var tartget_value = 1.05 * topRecommendedItem[feature]
                         //
                         //                         requestLink = requestLink + '&target_'+feature+'=' + tartget_value;
                         //
                         //                         explaination = "OK, I recommend this phone to you, because you like the phones of higher"+ feature+"."
                         //                     }
                         //                     else if (action == "lower") {
-                        //                         var tartget_value = 0.95 * topRecommendedSong[feature]
+                        //                         var tartget_value = 0.95 * topRecommendedItem[feature]
                         //
                         //                         requestLink = requestLink + '&target_'+feature+'=' + tartget_value;
                         //
@@ -1636,7 +1649,7 @@ $(document).ready(function () {
                         //                     }
                         //                     else if (action == "") {
                         //
-                        //                         requestLink = requestLink + '&target_'+feature+'=' + topRecommendedSong[feature];
+                        //                         requestLink = requestLink + '&target_'+feature+'=' + topRecommendedItem[feature];
                         //
                         //                         explaination = "OK, I recommend this phone to you, because you like the last played phones in terms of its "+ feature+"."
                         //                     }
@@ -1671,28 +1684,28 @@ $(document).ready(function () {
                         //                     if (track[critAttr] == critiques[critiquesIndex].action[index2].val) {
                         //                         templist.push(track)
                         //                         data.user.preferenceData[critAttr + "Range"][0] = 0
-                        //                         data.user.preferenceData[critAttr + "Range"][1] = data.topRecommendedSong[critAttr] - data.user.preferenceData_variance[critAttr]
+                        //                         data.user.preferenceData[critAttr + "Range"][1] = data.topRecommendedItem[critAttr] - data.user.preferenceData_variance[critAttr]
                         //                         data.user.preferenceData[critAttr + "Range"][2] = "low"
                         //                     }
                         //                 } else if (critType == "lower") {
                         //                     console.log(data.user.preferenceData[critAttr])
-                        //                     if (track[critAttr] < data.topRecommendedSong[critAttr] - data.user.preferenceData_variance[critAttr]) {
+                        //                     if (track[critAttr] < data.topRecommendedItem[critAttr] - data.user.preferenceData_variance[critAttr]) {
                         //                         templist.push(track)
                         //                     }
                         //                 } else if (critType == "higher") {
                         //                     console.log(data.user.preferenceData[critAttr])
-                        //                     if (track[critAttr] > data.topRecommendedSong[critAttr] + data.user.preferenceData_variance[critAttr]) {
+                        //                     if (track[critAttr] > data.topRecommendedItem[critAttr] + data.user.preferenceData_variance[critAttr]) {
                         //                         templist.push(track)
-                        //                         data.user.preferenceData[critAttr + "Range"][0] = data.topRecommendedSong[critAttr] + data.user.preferenceData_variance[critAttr]
+                        //                         data.user.preferenceData[critAttr + "Range"][0] = data.topRecommendedItem[critAttr] + data.user.preferenceData_variance[critAttr]
                         //                         data.user.preferenceData[critAttr + "Range"][1] = 1
                         //                         data.user.preferenceData[critAttr + "Range"][2] = "high"
                         //                     }
                         //                 } else if (critType == "similar") {
                         //                     console.log(data.user.preferenceData[critAttr])
-                        //                     if (track[critAttr] >= data.topRecommendedSong[critAttr] - data.user.preferenceData_variance[critAttr] && track[critAttr] <= data.topRecommendedSong[critAttr] + data.user.preferenceData_variance[critAttr]) {
+                        //                     if (track[critAttr] >= data.topRecommendedItem[critAttr] - data.user.preferenceData_variance[critAttr] && track[critAttr] <= data.topRecommendedItem[critAttr] + data.user.preferenceData_variance[critAttr]) {
                         //                         templist.push(track)
-                        //                         data.user.preferenceData[critAttr + "Range"][0] = data.topRecommendedSong[critAttr] - data.user.preferenceData_variance[critAttr]
-                        //                         data.user.preferenceData[critAttr + "Range"][1] = data.topRecommendedSong[critAttr] + data.user.preferenceData_variance[critAttr]
+                        //                         data.user.preferenceData[critAttr + "Range"][0] = data.topRecommendedItem[critAttr] - data.user.preferenceData_variance[critAttr]
+                        //                         data.user.preferenceData[critAttr + "Range"][1] = data.topRecommendedItem[critAttr] + data.user.preferenceData_variance[critAttr]
                         //                         data.user.preferenceData[critAttr + "Range"][2] = "middle"
                         //                     }
                         //                 }

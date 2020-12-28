@@ -278,8 +278,8 @@ html
                 i.fa.fa-heart-o.fa-2x
         hr
         .row.justify-content-center
-            button.btn.btn-primary Back
-            button.btn.btn-primary Submit
+            button.back Back
+            button.submit  Submit
         script(type='text/javascript').
             window.onload = function(){
                 var phones
@@ -338,5 +338,17 @@ html
                         }
                     }
                     console.log(likedPhones)
+                })
+                $(".submit").click(function (event) {
+                    if(likedPhones.length==0){
+                        alert("Please indicate 1-3 phones you might be interested in.")
+                    }
+                    else{
+                        console.log(likedPhones)
+                        window.localStorage.setItem("selectedPhones",likedPhones)
+                        window.location.href = '/index'
+                    }
+
+
                 })
             }
