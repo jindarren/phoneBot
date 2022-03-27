@@ -13,9 +13,7 @@ html(lang='en-us')
     #container
       .context
         #likedphones
-            h5(style="text-align:center; font-weight:bold; background:yellow") Task: Find 5 phones you want to put in your shopping cart.
-            p Please rate your liked phones in terms of its&nbsp
-              strong pleasant surprise.
+            h5.intro Task: Find 5 phones you want to put in your shopping cart.
             ul.list-group
         #task1(style="display:none") You have finished the task, please fill the final questionnaire.
 
@@ -33,58 +31,48 @@ html(lang='en-us')
         #accordion
           h3 Tips for tuning the recommendations by phone features
           div
-            p.desc Currently the system supports searching by 5 phone features,
+            p.desc
+              span.emphtext By brand:
+            p.example "I like the iPhone."
+            p.example "I want to buy a Huawei mobile phone."
             br
 
             p.desc
-              span.exp(data-container="body" data-toggle='popover', data-placement='auto', data-content='Energy represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale.', style="color:#2061E5") Energy:
-              span To tweak recommendation by price, you can say
-            p.example "I want to buy a cheaper phone."
+              span.emphtext By price:
+            p.example "I want to buy a cheaper price phone."
             p.example "The price can be higher."
             br
-            
+
             p.desc
-              span.exp(data-container="body" data-toggle='popover', data-placement='auto', data-content='Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity.', style="color:#2061E5") Danceability:
-              span To tweak recommendation by resolution, you can say
-            p.example "I need a phone having better display"
+              span.emphtext By resolution:
+            p.example "I need a phone having better display."
+            p.example "I want a phone having higher resolution."
             br
 
             p.desc
-              span.exp(data-container="body" data-toggle='popover', data-placement='auto', data-content='Speechiness detects the presence of spoken words in a track.', style="color:#2061E5") Speechiness:
-              span To tweak recommendation by memory, you can say
-            p.example "I need a phone with a large storage"
-            p.example "I need a phone having more space for saving my photos"
+              span.emphtext By storage:
+            p.example "I need a phone with a large storage."
+            p.example "I need a phone having more space for saving my photos."
             br
 
             p.desc
-              span.exp(data-container="body" data-toggle='popover', data-placement='auto', data-content='Tempo is the speed or pace of a given piece and derives directly from the average beat duration.', style="color:#2061E5") Tempo:
-              span To tweak recommendation by computing performance, you can say
-            p.example "I want to buy a phone having larger RAM"
-            p.example "I want to buy a phone having better GPU"
-            p.example "I want to buy a phone running applications faster"
+              span.emphtext By computing performance:
+            p.example "I want to buy a phone having larger RAM."
+            p.example "I want to buy a phone having better GPU."
+            p.example "I want to buy a phone running applications faster."
             br
 
             p.desc
-              span.exp(data-container="body" data-toggle='popover', data-placement='auto', data-content='Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).', style="color:#2061E5") Valence:
-              span To tweak recommendation by barnd, you can say
-            p.example "I like iPhone"
-            p.example "I want to buy Huawei mobile phones"
+              span.emphtext By operating system:
+            p.example "I want to buy an Android phone."
+            p.example "I like the ios system."
+            br
 
-          h3 Tips for tuning the recommendations by phone operating system (OS)
-          div
             p.desc
-              | If you want to search for phones by OS
-              | you can say
-            br
-            p.example "I want to buy an Android phone"
-            p.example "I like iPhone"
+              span.emphtext By size:
+            p.example "I like a light weight phone"
+            p.example "I want to buy a phone with a slim body"
 
-          h3 Tips for tuning the recommendations by size
-          div
-            p.desc If you want to search for phones by size, you can say
-            br
-            p.example "I like light weight phone"
-            p.example "I want to buy a phone with slim body"
     script(type = "text/javascript", src = "../jquery/dist/jquery.min.js", charset = 'utf-8')
     script(type = "text/javascript", src = "../jquery.cookie/jquery.cookie.js", charset = 'utf-8')
     script(type = "text/javascript", src = "../jquery-ui/jquery-ui.min.js", charset = 'utf-8')

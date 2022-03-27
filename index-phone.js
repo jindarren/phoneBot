@@ -86,40 +86,17 @@ io.on('connection', function(socket){
 });
 
 // Imports the Dialogflow library
-const dialogflow = require('dialogflow');
+const dialogflow = require('@google-cloud/dialogflow');
 
 // Instantiates a session client
-const sessionClient = new dialogflow.SessionsClient();
 
 const projectId = "mobilephone-xlojne"
-const sessionId = "123456789"
-const languageCode = "en-US";
+const sessionId = "123456"
+const languageCode = "en-US"
 
-io.on('connection', function(socket) {
-    socket.on('chat message', (text) => {
-        console.log('Message: ' + text);
-
-        // // Get a reply from API.ai
-        // let apiaiReq = apiai.textRequest(text, {
-        //     sessionId: APIAI_SESSION_ID
-        // });
-        //
-        // apiaiReq.on('response', (response) => {
-        //     //let aiText = response.result.fulfillment.speech;
-        //     console.log('Bot reply: ' + response.result.fulfillment.speech);
-        //     socket.emit('bot reply', response.result);
-        // });
-        //
-        // apiaiReq.on('error', (error) => {
-        //     console.log(error);
-        // });
-        //
-        // apiaiReq.end();
-
-
-        /**
-         * TODO(developer): UPDATE these variables before running the sample.
-         */
+/**
+ * TODO(developer): UPDATE these variables before running the sample.
+ */
 // projectId: ID of the GCP project where Dialogflow agent is deployed
 // const projectId = 'PROJECT_ID';
 // sessionId: String representing a random number or hashed user identifier
@@ -133,6 +110,15 @@ io.on('connection', function(socket) {
 // languageCode: Indicates the language Dialogflow agent should use to detect intents
 // const languageCode = 'en';
 
+// Imports the Dialogflow library
+
+// Instantiates a session client
+const sessionClient = new dialogflow.SessionsClient();
+
+
+io.on('connection', function(socket) {
+    socket.on('chat message', (query) => {
+        console.log('Message: ' + query);
 
         async function detectIntent(
             projectId,
@@ -142,7 +128,7 @@ io.on('connection', function(socket) {
             languageCode
         ) {
             // The path to identify the agent that owns the created intent.
-            const sessionPath = sessionClient.sessionPath(
+            const sessionPath = sessionClient.projectAgentSessionPath(
                 projectId,
                 sessionId
             );
@@ -172,29 +158,27 @@ io.on('connection', function(socket) {
             // Keeping the context across queries let's us simulate an ongoing conversation with the bot
             let context;
             let intentResponse;
-            for (const query of queries) {
-                try {
-                    console.log(`Sending Query: ${query}`);
-                    intentResponse = await detectIntent(
-                        projectId,
-                        sessionId,
-                        query,
-                        context,
-                        languageCode
-                    );
-                    console.log('Detected intent');
-                    console.log(
-                        `Fulfillment Text: ${intentResponse.queryResult.fulfillmentText}`
-                    );
-                    socket.emit('bot reply', intentResponse.queryResult);
-                    // Use the context from this response for next queries
-                    context = intentResponse.queryResult.outputContexts;
-                } catch (error) {
-                    console.log(error);
-                }
+            try {
+                console.log(`Sending Query: ${query}`);
+                intentResponse = await detectIntent(
+                    projectId,
+                    sessionId,
+                    query,
+                    context,
+                    languageCode
+                );
+                console.log('Detected intent');
+                console.log(
+                    `Fulfillment Text: ${intentResponse.queryResult.fulfillmentText}`
+                );
+                socket.emit('bot reply', intentResponse.queryResult);
+                // Use the context from this response for next queries
+                context = intentResponse.queryResult.outputContexts;
+            } catch (error) {
+                console.log(error);
             }
         }
-        executeQueries(projectId, sessionId, [text], languageCode);
+        executeQueries(projectId, sessionId, query, languageCode);
 
     });
 });

@@ -265,11 +265,20 @@ input{border:0;outline:none;}
   margin: 20px;
   background: whitesmoke;
   opacity: 0.9;
+}
 
+.emphtext {
+    text-decoration: underline;
+}
+
+.intro{
+    padding: 5px 10px 5px;
+    font-weight:bold;
+    background:yellow;
 }
 
 .desc{
-    color: #7f7f7f;
+    color: #393939;
     padding:0px;
     margin:0px;
 }
