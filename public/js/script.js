@@ -590,7 +590,6 @@ Load phone data, may connect to phone database
             }
 
             var showPhone = function (id) {
-
                 var dialog = {}
                 dialog.agent = "robot"
                 dialog.text = id
@@ -604,6 +603,7 @@ Load phone data, may connect to phone database
                     console.log(numberOfLikedPhones)
 
                     // if (isSystemCrit == 1) {
+                    // phonelist is an initial recommendation pool
                     var currentPhone = phonelist[phoneIndex]
                     var line = $('<div id="speak' + id + '" class="speak"><div id="card">\n' +
                         '<div class="card-col left-col">\n' +

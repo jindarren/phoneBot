@@ -1,8 +1,5 @@
 'use strict';
 
-// const APIAI_TOKEN = '1493bad763ec4671b1ee6ea4a8c80452';
-// const APIAI_SESSION_ID = '123456789abcdefghj';
-
 const express = require('express'),
     path = require('path'),
     favicon = require('serve-favicon'),
@@ -14,14 +11,6 @@ const express = require('express'),
     passport = require('passport'),
     mongoose = require('mongoose');
 
-
-// var https = require('https'),
-//     fs = require("fs");
-
-// var options = {
-//     key: fs.readFileSync('1644342_music-bot.top.key'),
-//     cert: fs.readFileSync('1644342_music-bot.top.pem')
-// };
 
 const app = express();
 var index = require('./routes/router-en');

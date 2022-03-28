@@ -1,34 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var recom = require('./recommender');
-var passport = require('passport');
-var SpotifyStrategy = require('../node_modules/passport-spotify/lib/passport-spotify/index').Strategy;
 var request = require('request');
 var User = require('../public/model/user');
-var franc = require('franc-min') //for language detection
-var pinyin = require("pinyin");
-var genreData = require('../public/js/genre-data');
-
-var avaGenres = genreData
-
-var appKey = 'a1d9f15f6ba54ef5aea0c5c4e19c0d2c',
-appSecret = 'b368bdb3003747ec861e62d3bf381ba0';
-
-    // Passport session setup.
-    //   To support persistent login sessions, Passport needs to be able to
-    //   serialize users into and deserialize users out of the session. Typically,
-    //   this will be as simple as storing the user ID when serializing, and finding
-    //   the user by ID when deserializing. However, since this example does not
-    //   have a database of user records, the complete spotify profile is serialized
-    //   and deserialized.
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-    done(null, obj);
-});
-
 
 // Use the SpotifyStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
