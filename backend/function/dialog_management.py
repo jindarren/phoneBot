@@ -20,7 +20,8 @@ def determine_trigger_sc_or_not(interaction_log, cur_rec, categorical_attributes
 
     # Conditions
     num_disliked_songs_condition = 3 # If the user clicks the “Next” button for n consecutive times.
-    num_liked_songs_condition = 2 # If the total number of liked songs in the current genre >= n
+    num_listened_songs_condition = 4 # If the number of listened songs (from last SC) (== num_recommendation_cycle) >= n
+    # num_liked_songs_condition = 3 # If the total number of liked songs in the current genre >= n
 
     cur_rec_genre = cur_rec['genre']
     if 'latest_dialog' in interaction_log.keys():
@@ -38,7 +39,7 @@ def determine_trigger_sc_or_not(interaction_log, cur_rec, categorical_attributes
     pos_sys_crit = 0
     for utterance_info in previous_dialogue:
         action = utterance_info['action'].lower()
-        if action == "system_suggest":
+        if action == "system_suggest" or action == "user_critique" :
             if 'critique' in utterance_info.keys():
                 pos_sys_crit = number_utterance
         number_utterance += 1
@@ -66,21 +67,35 @@ def determine_trigger_sc_or_not(interaction_log, cur_rec, categorical_attributes
 
         for utterance_info in previous_dialogue[pos_sys_crit:]:
             if utterance_info['agent']=='you':
-                if utterance_info['action'].lower() == 'next':
+                if utterance_info['action'].lower() == 'next' or 'next' in utterance_info['text'].lower():
                     num_consectively_disliked_songs += 1
                 if utterance_info['action'].lower() == 'accept_song':
                     num_consectively_disliked_songs = 0 
-            
+        # print("cur_rec_genre:", cur_rec_genre) 
+
+        liked_songs_id_list = []
+        for each in interaction_log['likedSongs']:
+            liked_songs_id_list.append(each['id'])
+
         for song_info in interaction_log['listenedSongs']:
+            # print(song_info['genre'])
             if song_info['genre'] == cur_rec_genre:
                 num_satisfied_listend_songs += 1
-                if song_info['id'] in interaction_log['likedSongs']:
+                if song_info['id'] in liked_songs_id_list:
                     num_satisfied_liked_songs += 1
 
-        if num_satisfied_liked_songs >= num_liked_songs_condition :
+        print("num_consectively_disliked_songs:", num_consectively_disliked_songs)
+        print("num_satisfied_listend_songs:", num_satisfied_listend_songs)
+        print("num_satisfied_liked_songs:", num_satisfied_liked_songs)
+        # if num_satisfied_liked_songs >= num_liked_songs_condition :
+        #     time_helper.print_current_time()
+        #     print("num_satisfied_liked_songs: %d." % num_satisfied_liked_songs)
+        #     results_trigger_sc = True
+        if num_recommendation_cycle >= num_listened_songs_condition:
             time_helper.print_current_time()
-            print("num_satisfied_liked_songs: %d." % num_satisfied_liked_songs)
+            print("num_recommendation_cycle: %d." % num_recommendation_cycle)
             results_trigger_sc = True
+
         elif num_consectively_disliked_songs >= num_disliked_songs_condition :
             time_helper.print_current_time()
             print("num_consectively_disliked_songs: %d." % num_consectively_disliked_songs)

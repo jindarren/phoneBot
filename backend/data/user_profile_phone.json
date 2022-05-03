@@ -1,0 +1,64 @@
+{
+    "user": {
+        "preferenceData": {
+            "phones": [
+                23,
+                67,
+                204
+            ]
+        },
+        "_id": "23fsdf23r4fsdfss"
+    },
+    "topRecommendedItem": 200,
+    "logger": {
+        "dialog": [],
+        "latest_dialog": [
+            {
+                "agent": "you",
+                "text": "higher price",
+                "modality": "typing",
+                "action": "User_Critique",
+                "critique": [
+                    {
+                        "price": "higher"
+                    }
+                ],
+                "critiqued_item": 200,
+                "timestamp": 1554364438665
+            },
+            {
+                "agent": "robot",
+                "text": "789",
+                "action": "Recommend",
+                "timestamp": 1554364466208
+            },
+            {
+                "agent": "you",
+                "text": "I like this one.",
+                "modality": "btn",
+                "action": "Accept_Item",
+                "user_critique": [
+                    {
+                        "price": "higher"
+                    }
+                ],
+                "critiqued_item": 200,
+                "timestamp": 1554364493262
+            }
+        ],
+        "browsedItems": [
+            4,
+            10,
+            20,
+            200
+        ],
+        "likedItems": [
+            4,
+            10
+        ],
+        "dislikedItems": [
+            20,
+            200
+        ]
+    }
+}

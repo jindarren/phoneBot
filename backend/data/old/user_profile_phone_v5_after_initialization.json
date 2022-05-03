@@ -1,0 +1,307 @@
+{
+    "user": {
+        "preferenceData": {
+            "phone_name": [
+                "Huawei P smart",
+                "alcatel Tetra",
+                "alcatel Pulsemix"
+            ]
+        },
+        "_id": "23fsdf23r4fsdfss",
+        "user_preference_model": {
+            "preference_value": {
+                "brand": {
+                    "alcatel": 2,
+                    "Huawei": 1
+                },
+                "nettech": {
+                    "GSM / HSPA / LTE": 3
+                },
+                "os1": {
+                    "Android": 3
+                },
+                "nfc": {
+                    "false": 2,
+                    "true": 1
+                },
+                "year": {
+                    "2017": 2,
+                    "2018": 1
+                },
+                "fullscreen": {
+                    "false": 3
+                },
+                "phone_size": {
+                    "1": 2,
+                    "2": 1,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0
+                },
+                "phone_weight": {
+                    "1": 3,
+                    "2": 0,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0
+                },
+                "camera": {
+                    "1": 2,
+                    "2": 1,
+                    "3": 0,
+                    "4": 0
+                },
+                "storage": {
+                    "1": 2,
+                    "2": 1,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0
+                },
+                "ram": {
+                    "1": 2,
+                    "2": 1,
+                    "3": 0,
+                    "4": 0,
+                    "5": 0
+                },
+                "price": {
+                    "1": 2,
+                    "4": 1,
+                    "2": 0,
+                    "3": 0,
+                    "5": 0,
+                    "6": 0,
+                    "7": 0,
+                    "8": 0,
+                    "9": 0,
+                    "10": 0
+                }
+            },
+            "attribute_frequency": {
+                "brand": 1,
+                "nettech": 1,
+                "os1": 1,
+                "nfc": 1,
+                "year": 1,
+                "fullscreen": 1,
+                "phone_size": 1,
+                "phone_weight": 1,
+                "camera": 1,
+                "storage": 1,
+                "ram": 1,
+                "price": 1
+            }
+        },
+        "user_critique_preference": [],
+        "user_constraints": []
+    },
+    "topRecommendedItem": "Huawei P smart",
+    "logger": {
+        "dialog": [],
+        "latest_dialog": [
+            {
+                "agent": "you",
+                "text": "higher price",
+                "modality": "typing",
+                "action": "User_Critique",
+                "critique": [
+                    {
+                        "price": "higher"
+                    },
+                    {
+                        "nettech": "5G"
+                    }
+                ],
+                "critiqued_item": "Huawei P smart",
+                "timestamp": 1554364438665
+            },
+            {
+                "agent": "robot",
+                "text": "alcatel Tetra",
+                "action": "Recommend",
+                "timestamp": 1554364466208
+            },
+            {
+                "agent": "you",
+                "text": "I like this one.",
+                "modality": "btn",
+                "action": "Accept_Item",
+                "user_critique": [
+                    {
+                        "price": "higher"
+                    }
+                ],
+                "critiqued_item": "Huawei P smart",
+                "timestamp": 1554364493262
+            }
+        ],
+        "browsedItems": [
+            "alcatel Tetra",
+            "alcatel Pulsemix",
+            "Allview X4 Soul Infinity Plus",
+            "Huawei P smart"
+        ],
+        "likedItems": [
+            "alcatel Tetra",
+            "alcatel Pulsemix"
+        ],
+        "dislikedItems": [
+            "Allview X4 Soul Infinity Plus",
+            "Huawei P smart"
+        ]
+    },
+    "pool": [
+        "alcatel 1",
+        "alcatel 3v",
+        "alcatel 3c",
+        "alcatel Tetra",
+        "alcatel 3",
+        "alcatel Pulsemix",
+        "Huawei Y5 Prime (2018)",
+        "Huawei Y6 (2018)",
+        "Huawei Y3 (2017)",
+        "Huawei Y6 Prime (2018)",
+        "Huawei Y3 (2018)",
+        "Huawei P9 lite mini",
+        "Huawei Y5 lite (2018)",
+        "Huawei Y5 (2017)",
+        "Huawei Y7",
+        "Huawei Y6 (2017)",
+        "Huawei Y7 (2018)",
+        "alcatel 1x",
+        "alcatel 5",
+        "alcatel 7",
+        "alcatel 5v",
+        "alcatel Idol 5",
+        "alcatel Idol 5s",
+        "alcatel Idol 5s (USA)",
+        "alcatel A7",
+        "Huawei Y9 (2019)",
+        "Huawei P smart 2019",
+        "Huawei P10 Lite",
+        "Huawei P smart",
+        "Huawei P8 Lite (2017)",
+        "Huawei Y7 Prime (2018)",
+        "Huawei P Smart+ 2019",
+        "Huawei Y7 Pro (2018)",
+        "Huawei Y7 Prime",
+        "Huawei Y9 (2018)",
+        "alcatel A7 XL",
+        "Huawei P20 lite",
+        "Huawei P20",
+        "Huawei nova 3i",
+        "Huawei Mate 10 Pro",
+        "Huawei P10",
+        "Huawei Mate 20 lite",
+        "Huawei Mate 10 Lite",
+        "Huawei Mate 10",
+        "Huawei Y Max",
+        "Huawei Mate RS Porsche Design",
+        "Huawei Mate 10 Porsche Design",
+        "Huawei nova 2s",
+        "Huawei P20 Pro",
+        "Huawei P10 Plus",
+        "Huawei nova 2 plus",
+        "alcatel 1v (2019)",
+        "alcatel 1x (2019)",
+        "alcatel 1V (2020)",
+        "alcatel 1B (2020)",
+        "Allview X4 Soul Mini S",
+        "Archos 50 Graphite",
+        "Asus ZenFone Live (L1) ZA550KL",
+        "Asus Zenfone Max (M1) ZB555KL",
+        "Asus Zenfone Live ZB501KL",
+        "Asus ZenFone Lite (L1) ZA551KL",
+        "Asus Zenfone Go ZB552KL",
+        "Asus Zenfone 4 Selfie Lite ZB553KL",
+        "Blackview A7 Pro",
+        "BLU Vivo One Plus",
+        "BLU Grand M3",
+        "BLU Studio J8M LTE",
+        "BQ Aquaris V",
+        "BQ Aquaris U2",
+        "BQ Aquaris U2 Lite",
+        "Cat S31",
+        "Coolpad Defiant",
+        "Energizer Power Max P490S",
+        "Energizer Hardcase H500S",
+        "Energizer Power Max P550S",
+        "Energizer Energy E520 LTE",
+        "Energizer Energy S550",
+        "Honor 7A",
+        "Honor 6A (Pro)",
+        "HTC Desire 12",
+        "Lava Z10",
+        "Lenovo K320t",
+        "LG Q6",
+        "LG Q Stylo 4",
+        "LG K11 Plus",
+        "LG Stylo 3 Plus",
+        "LG X power2",
+        "LG K10 (2018)",
+        "LG X power 3",
+        "LG X venture",
+        "LG Candy",
+        "LG Harmony",
+        "LG K7 (2017)",
+        "Meizu C9",
+        "Meizu M6",
+        "Meizu M8c",
+        "Meizu E2",
+        "Micromax Spark Vdeo Q415",
+        "Motorola Moto G5",
+        "Motorola Moto E5",
+        "Motorola Moto E5 Cruise",
+        "Nokia 5.1",
+        "Nokia 3.1",
+        "Nokia 2",
+        "Nokia 1",
+        "Oppo A3s",
+        "Panasonic P9",
+        "Panasonic P85",
+        "Panasonic Eluga Pulse",
+        "Samsung Galaxy J4",
+        "Samsung Galaxy J2 Core",
+        "Samsung Galaxy J2 Pro (2018)",
+        "Samsung Galaxy J3 (2018)",
+        "Samsung Galaxy J4 Core",
+        "Samsung Galaxy J7 (2018)",
+        "Samsung Galaxy J7 Nxt",
+        "Samsung Galaxy Xcover 4",
+        "Samsung Galaxy J2 (2017)",
+        "Sony Xperia L1",
+        "T-Mobile Revvl",
+        "vivo Y91i",
+        "vivo Y71i",
+        "Vodafone Smart E9",
+        "Vodafone Smart E8",
+        "Vodafone Smart N8",
+        "Vodafone Smart N9 lite",
+        "Xiaomi Redmi 4 (4X)",
+        "ZTE Blade Z Max",
+        "ZTE Blade V9 Vita",
+        "ZTE Blade V8",
+        "ZTE Max XL",
+        "ZTE Blade X",
+        "ZTE Blade V8 Lite",
+        "ZTE Blade V8 Mini",
+        "ZTE Blade V7 Plus",
+        "Archos Saphir 50X",
+        "Asus Zenfone 4 Max Pro ZC554KL",
+        "Asus Zenfone 4 Max ZC520KL",
+        "BLU Vivo Go",
+        "BLU Vivo One",
+        "Energizer Energy 400 LTE",
+        "Honor 7S",
+        "Huawei Y6 (2019)",
+        "Huawei Y5 (2019)",
+        "LG K30",
+        "LG Aristo 2",
+        "LG X4+",
+        "Meizu M5c",
+        "Motorola Moto E4",
+        "Motorola Moto C"
+    ],
+    "new_pool":[]
+}
